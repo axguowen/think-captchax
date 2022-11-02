@@ -1,0 +1,26 @@
+{
+    "name": "axguowen/think-captchax",
+    "description": "Behavior captcha package for ThinkPHP",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "axguowen",
+            "email": "axguowen@qq.com"
+        }
+    ],
+    "require": {
+        "topthink/framework": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "axguowen\\": "src"
+        }
+    },
+    "extra": {
+        "think": {
+            "config": {
+                "captchax": "src/config.php"
+            }
+        }
+    }
+}
