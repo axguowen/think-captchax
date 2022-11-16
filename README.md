@@ -96,7 +96,7 @@ return [
         // vaptcha平台
         'vaptcha' => [
             // 驱动类型
-            'type' => 'Geetest',
+            'type' => 'Vaptcha',
             // 验证单元的VID
             'vid' => '',
             // 验证单元的KEY
