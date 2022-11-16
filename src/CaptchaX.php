@@ -29,17 +29,6 @@ class CaptchaX extends Manager
 	protected $namespace = '\\axguowen\\captchax\\driver\\';
 
 	/**
-     * 选择或者切换平台
-     * @access public
-     * @param string $name 平台的配置名
-     * @return \axguowen\captchax\Platform
-     */
-    public function platform($name = null)
-    {
-        return $this->driver($name);
-    }
-
-	/**
      * 默认驱动
      * @access public
      * @return string|null
@@ -66,16 +55,6 @@ class CaptchaX extends Manager
     }
 
 	/**
-     * 获取驱动配置
-     * @param string $name 驱动名称
-     * @return mixed
-     */
-    protected function resolveConfig($name)
-    {
-        return $this->getPlatformConfig($name);
-    }
-
-	/**
      * 获取平台配置
      * @param string $platform 平台名称
      * @param null|string $name 配置名称
@@ -90,5 +69,58 @@ class CaptchaX extends Manager
         }
 		// 驱动不存在
         throw new \InvalidArgumentException('验证码平台 [' . $platform . '] 配置不存在.');
+    }
+
+    /**
+     * 当前平台的驱动配置
+     * @param string $name 驱动名称
+     * @return mixed
+     */
+    protected function resolveType($name)
+    {
+        return $this->getPlatformConfig($name, 'type', 'geetest');
+    }
+
+	/**
+     * 获取驱动配置
+     * @param string $name 驱动名称
+     * @return mixed
+     */
+    protected function resolveConfig($name)
+    {
+        return $this->getPlatformConfig($name);
+    }
+
+	/**
+     * 选择或者切换平台
+     * @access public
+     * @param string $name 平台的配置名
+     * @return \axguowen\captchax\Platform
+     */
+    public function platform($name = null)
+    {
+        return $this->driver($name);
+    }
+
+    /**
+     * 生成验证码
+     * @access public
+     * @param array $data 验证码数据
+     * @return mixed
+     */
+    public function create()
+    {
+        return $this->platform()->create();
+    }
+
+    /**
+     * 验证验证码
+     * @access public
+     * @param array $data 验证码数据
+     * @return mixed
+     */
+    public function validate()
+    {
+        return $this->platform()->validate();
     }
 }

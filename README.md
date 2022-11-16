@@ -31,11 +31,7 @@ composer require axguowen/think-captchax
 use axguowen\facade\CaptchaX;
 
 // 生成极验验证码数据
-$captchaData = CaptchaX::create([
-    'user_id' => '',
-    'client_type' => \think\facade\Request::isMobile() ? 'h5' : 'web',
-    'ip_address' => \think\facade\Request::ip(),
-]);
+$captchaData = CaptchaX::create();
 
 print_r($captchaData);
 
@@ -45,11 +41,7 @@ print_r($captchaData);
 
 ~~~php
 
-$validateStatus = CaptchaX::validate([
-    'user_id' => '',
-    'client_type' => \think\facade\Request::isMobile() ? 'h5' : 'web',
-    'ip_address' => \think\facade\Request::ip(),
-]);
+$validateStatus = CaptchaX::validate();
 
 // 验证不通过
 if(!$validateStatus){
@@ -65,9 +57,7 @@ if(!$validateStatus){
 use axguowen\facade\CaptchaX;
 
 // 使用Vaptcha平台
-$validateStatus = CaptchaX::platform('vaptcha')->validate([
-    'ip' => \think\facade\Request::ip(),
-]);
+$validateStatus = CaptchaX::platform('vaptcha')->validate();
 
 // 验证不通过
 if(!$validateStatus){
@@ -88,6 +78,8 @@ return [
     'platforms' => [
         // 极验平台
         'geetest' => [
+            // 驱动类型
+            'type' => 'Geetest',
             // 极验验证ID
             'captcha_id' => '',
             // 极验私钥
@@ -103,6 +95,8 @@ return [
         ],
         // vaptcha平台
         'vaptcha' => [
+            // 驱动类型
+            'type' => 'Geetest',
             // 验证单元的VID
             'vid' => '',
             // 验证单元的KEY

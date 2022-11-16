@@ -63,17 +63,16 @@ class Geetest
     /**
      * 创建验证码
      * @access public
-     * @param array $params 验证码参数
      * @return mixed
      */
-    public function create($params = [])
+    public function create()
     {
         // 验证码流水号
         $originChallenge = null;
         // 如果服务器正常
         if($this->serverCheck()){
             // 从服务器获取流水号数据源
-            $originChallenge = $this->requestRegister($params);
+            $originChallenge = $this->requestRegister();
         }
         // 返回
         return $this->buildRegisterResult($originChallenge);
@@ -82,10 +81,9 @@ class Geetest
     /**
      * 验证码校验
      * @access public
-     * @param  string $params 额外参数
      * @return bool
      */
-    public function validate($params = [])
+    public function validate()
     {
         // 获取请求中的流水号
         $challenge = Request::param($this->options['challenge_field']);
@@ -101,7 +99,7 @@ class Geetest
         }
         // 如果服务器正常
         if($this->serverCheck()){
-            return $this->successValidate($challenge, $validate, $seccode, $params);
+            return $this->successValidate($challenge, $validate, $seccode);
         }
         // 简单校验
         return $this->failValidate($challenge, $validate, $seccode);
@@ -110,35 +108,20 @@ class Geetest
     /**
      * 从极验服务器获取验证码流水号数据源
      * @access protected
-     * @param array $params 验证码参数
      * @return mixed
      */
-    protected function requestRegister($params)
+    protected function requestRegister()
     {
         // 请求参数
         $data = [
             'user_id' => '',
-            'client_type' => 'web',
-            'ip_address' => '',
+            'client_type' => Request::isMobile() ? 'h5' : 'web',
+            'ip_address' => Request::ip(),
             'gt' => $this->options['captcha_id'],
             'sdk' => self::VERSION,
             'json_format' => 1,
             'digestmod' => $this->options['digestmod'],
         ];
-        // 初始化允许传入的参数获取
-        $initParams = [];
-        if(isset($params['user_id'])){
-            $initParams['user_id'] = $params['user_id'];
-        }
-        if(isset($params['client_type'])){
-            $initParams['client_type'] = $params['client_type'];
-        }
-        if(isset($params['ip_address'])){
-            $initParams['ip_address'] = $params['ip_address'];
-        }
-        // 合并参数
-        $data = array_merge($data, $initParams);
-
         // 验证码流水号
         $originChallenge = null;
         // 发送请求
@@ -209,10 +192,9 @@ class Geetest
      * @param  string $challenge 流水号
      * @param  string $validate 验证数据
      * @param  string $seccode 加密代码
-     * @param  string $params 额外参数
      * @return bool
      */
-    protected function successValidate($challenge, $validate, $seccode, $params = [])
+    protected function successValidate($challenge, $validate, $seccode)
     {
         // 构造验证码流水号加密串
         $secChallenge = null;
@@ -241,7 +223,7 @@ class Geetest
             return false;
         }
         // 发送验证请求
-        $responseSeccode = $this->requestValidate($challenge, $validate, $seccode, $params);
+        $responseSeccode = $this->requestValidate($challenge, $validate, $seccode);
         if (empty($responseSeccode) || $responseSeccode === 'false' || $responseSeccode != $secSeccode) {
             // 验证失败
             return false;
@@ -276,35 +258,21 @@ class Geetest
      * @param  string $challenge 流水号
      * @param  string $validate 验证数据
      * @param  string $seccode 加密代码
-     * @param  string $params 额外参数
      * @return bool
      */
-    protected function requestValidate($challenge, $validate, $seccode, $params = [])
+    protected function requestValidate($challenge, $validate, $seccode)
     {
         // 请求参数
         $data = [
             'user_id' => '',
-            'client_type' => 'web',
-            'ip_address' => '',
+            'client_type' => Request::isMobile() ? 'h5' : 'web',
+            'ip_address' => Request::ip(),
             'seccode' => $seccode,
             'json_format' => 1,
             'challenge' => $challenge,
             'sdk' => self::VERSION,
             'captchaid' => $this->options['captcha_id']
         ];
-        // 验证允许传入的参数获取
-        $validateParams = [];
-        if(isset($params['user_id'])){
-            $validateParams['user_id'] = $params['user_id'];
-        }
-        if(isset($params['client_type'])){
-            $validateParams['client_type'] = $params['client_type'];
-        }
-        if(isset($params['ip_address'])){
-            $validateParams['ip_address'] = $params['ip_address'];
-        }
-        // 合并参数
-        $data = array_merge($data, $validateParams);
         // 验证结果
         $responseSeccode = null;
         // 发送请求

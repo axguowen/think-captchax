@@ -21,8 +21,8 @@ use think\Facade;
  * @method static mixed getConfig(null|string $name = null, mixed $default = null) 获取配置
  * @method static array getPlatformConfig(string $platform, null $name = null, null $default = null) 获取平台配置
  * @method static string|null getDefaultDriver() 默认平台
- * @method static array create(array $params) 生成验证码
- * @method static bool validate(array $params) 验证码校验
+ * @method static array create() 生成验证码
+ * @method static bool validate() 验证验证码
  */
 class CaptchaX extends Facade
 {

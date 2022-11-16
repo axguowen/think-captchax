@@ -16,6 +16,8 @@ return [
     'platforms' => [
         // 极验平台
         'geetest' => [
+            // 驱动类型
+            'type' => 'Geetest',
             // 极验验证ID
             'captcha_id' => '',
             // 极验私钥
@@ -31,6 +33,8 @@ return [
         ],
         // vaptcha平台
         'vaptcha' => [
+            // 驱动类型
+            'type' => 'Vaptcha',
             // 验证单元的VID
             'vid' => '',
             // 验证单元的KEY

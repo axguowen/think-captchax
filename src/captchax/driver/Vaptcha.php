@@ -53,10 +53,9 @@ class Vaptcha
     /**
      * 创建验证码
      * @access public
-     * @param array $params 验证码参数
      * @return mixed
      */
-    public function create($params = [])
+    public function create()
     {
         // 返回配置
         return [
@@ -67,17 +66,17 @@ class Vaptcha
 
     /**
      * 获取验证结果
-     * @param array $params 验证参数
+     * @access public
      * @return bool
      */
-    public function validate($params = []) {
+    public function validate() {
         // 获取请求中的server参数
-        $server = Request::param($this->options['server_field'], '');
+        $server = Request::param($this->options['server_field']);
         if(empty($server)){
             return false;
         }
         // 获取请求中的token参数
-        $token = Request::param($this->options['token_field'], '');
+        $token = Request::param($this->options['token_field']);
         if(empty($token)){
             return false;
         }
@@ -87,7 +86,7 @@ class Vaptcha
             'secretkey' => $this->options['key'],
             'scene' => $this->options['scene'],
             'token' => $token,
-            'ip' => isset($params['ip']) ? $params['ip'] : '',
+            'ip' => Request::ip(),
         ];
         // 发送请求
         $resBody = $this->httpJson($server, json_encode($data));
