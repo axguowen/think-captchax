@@ -1,6 +1,6 @@
 # think-captchax
 
-ThinkPHP6.0 行为验证码扩展
+ThinkPHP 行为验证码扩展
 
 主要功能：
 
@@ -28,7 +28,7 @@ composer require axguowen/think-captchax
 
 ~~~php
 
-use axguowen\facade\CaptchaX;
+use think\facade\CaptchaX;
 
 // 生成极验验证码数据
 $captchaData = CaptchaX::create();
@@ -54,7 +54,7 @@ if(!$validateStatus){
 
 ~~~php
 
-use axguowen\facade\CaptchaX;
+use think\facade\CaptchaX;
 
 // 使用Vaptcha平台
 $validateStatus = CaptchaX::platform('vaptcha')->validate();
@@ -115,7 +115,7 @@ return [
 
 ## 自定义平台驱动
 
-如果需要扩展自定义验证平台驱动，需要继承axguowen\captchax\Platform类, 并实现create方法和validate方法。
+如果需要扩展自定义验证平台驱动，需要继承think\captchax\Platform类, 并实现create方法和validate方法。
 
 具体代码可以参考现有的平台驱动
 

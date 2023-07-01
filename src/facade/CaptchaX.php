@@ -9,14 +9,14 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace axguowen\facade;
+namespace think\facade;
 
 use think\Facade;
 
 /**
  * Class CaptchaX
- * @package axguowen\facade
- * @mixin \axguowen\CaptchaX
+ * @package think\facade
+ * @mixin \think\CaptchaX
  * @method static Platform platform(string $name = null) ,null|string
  * @method static mixed getConfig(null|string $name = null, mixed $default = null) 获取配置
  * @method static array getPlatformConfig(string $platform, null $name = null, null $default = null) 获取平台配置
@@ -33,6 +33,6 @@ class CaptchaX extends Facade
      */
     protected static function getFacadeClass()
     {
-        return \axguowen\CaptchaX::class;
+        return \think\CaptchaX::class;
     }
 }

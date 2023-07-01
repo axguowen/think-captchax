@@ -9,7 +9,7 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace axguowen\captchax\driver;
+namespace think\captchax\driver;
 
 use think\facade\Request;
 

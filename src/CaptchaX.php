@@ -17,7 +17,7 @@ use think\exception\InvalidArgumentException;
 
 /**
  * Class CaptchaX
- * @package axguowen
+ * @package think
  * @mixin Platform
  */
 class CaptchaX extends Manager
@@ -26,7 +26,7 @@ class CaptchaX extends Manager
      * 驱动的命名空间
      * @var string
      */
-	protected $namespace = '\\axguowen\\captchax\\driver\\';
+	protected $namespace = '\\think\\captchax\\driver\\';
 
 	/**
      * 默认驱动
@@ -95,7 +95,7 @@ class CaptchaX extends Manager
      * 选择或者切换平台
      * @access public
      * @param string $name 平台的配置名
-     * @return \axguowen\captchax\Platform
+     * @return \think\captchax\Platform
      */
     public function platform($name = null)
     {

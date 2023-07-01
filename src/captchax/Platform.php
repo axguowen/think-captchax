@@ -9,7 +9,7 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace axguowen\captchax;
+namespace think\captchax;
 
 abstract class Platform
 {
