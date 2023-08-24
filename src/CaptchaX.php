@@ -9,9 +9,8 @@
 // | Author: axguowen <axguowen@qq.com>
 // +----------------------------------------------------------------------
 
-namespace axguowen;
+namespace think;
 
-use think\Manager;
 use think\helper\Arr;
 use think\exception\InvalidArgumentException;
 
