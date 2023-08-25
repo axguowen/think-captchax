@@ -1,6 +1,6 @@
-# think-captchax
+# ThinkPHP 高级验证码
 
-ThinkPHP 行为验证码扩展
+ThinkPHP 的高级验证码扩展
 
 主要功能：
 
@@ -14,7 +14,7 @@ ThinkPHP 行为验证码扩展
 
 ## 安装
 
-~~~php
+~~~
 composer require axguowen/think-captchax
 ~~~
 

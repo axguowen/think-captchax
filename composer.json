@@ -1,6 +1,6 @@
 {
     "name": "axguowen/think-captchax",
-    "description": "Behavior captcha package for ThinkPHP",
+    "description": "Advanced captcha for ThinkPHP",
     "license": "Apache-2.0",
     "authors": [
         {
